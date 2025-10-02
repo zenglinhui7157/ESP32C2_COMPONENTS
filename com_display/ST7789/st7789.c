@@ -187,8 +187,8 @@ esp_err_t st7789_set_window(uint16_t xStart, uint16_t xEnd, uint16_t yStart, uin
     uint8_t data_row[4] = {yStart >> 8, yStart & 0xFF, yEnd >> 8, yEnd & 0xFF};
     ret = st7789_write_data(data_row, 4);
     if (ret != ESP_OK) return ret;
-    ret = st7789_write_cmd(0x2C); // Memory Write
-    return ret;
+    // Memory Write 命令由 LVGL 刷新回调发送
+    return ESP_OK;
 }
 
 esp_err_t st7789_draw_pixel(uint16_t x, uint16_t y, uint16_t color)
